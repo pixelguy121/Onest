@@ -17,5 +17,6 @@ async def ping(ctx):
 @bot.event
 async def on_message(message):
     print(f"Message received: {message.content}")  # Debugging line
+    await bot.process_commands(message)
 
 bot.run(os.environ['DISCORD_TOKEN'])
