@@ -8,7 +8,7 @@ intents = discord.Intents.default()
 intents.messages = True
 intents.guilds = True
 intents.message_content = True
-
+TOKEN = os.getenv("DISCORD_TOKEN")
 bot = commands.Bot(command_prefix="!", intents=intents)
 
 # Define role-based ping limits (lifetime usage)
@@ -102,4 +102,7 @@ async def resetping(ctx, member: discord.Member):
     save_pings()
     await ctx.send(f"{member.mention}'s ping count has been reset.")
 
-bot.run(os.environ['DISCORD_TOKEN'])
+if not TOKEN:
+    print("ERROR: DISCORD_TOKEN is missing! Set it in Railway environment variables.")
+else:
+    bot.run(TOKEN)
