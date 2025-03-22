@@ -8,3 +8,4 @@ idna==3.10
 multidict==6.2.0
 propcache==0.3.0
 yarl==1.18.3
+python-dotenv
