@@ -13,8 +13,9 @@ bot = commands.Bot(command_prefix="!", intents=intents)
 
 # Define role-based ping limits (lifetime usage)
 ping_limits = {
-    "basic_store": {"@everyone": 3, "@here": 2},
-    "premium_store": {"@everyone": 5, "@here": 4},
+    "basic": {"@everyone": 3, "@here": 2},
+    "premium": {"@everyone": 5, "@here": 4},
+    "admin": {"@everyone": 999, "@here": 999}  # No limit
 }
 
 # Load user ping data from JSON file
@@ -81,6 +82,7 @@ async def on_message(message):
         remaining_pings = user_limit[mention_type] - user_pings[user_id][mention_type]
         await message.channel.send(
             f"{message.author.mention}, you used `{mention_type}`. You have **{remaining_pings} pings left** for a lifetime.",
+            delete_after=5
         )
 
     await bot.process_commands(message)
